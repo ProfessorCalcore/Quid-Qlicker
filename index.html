@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<title>TRM.co.uk</title>
+    </head>
+
+    <body>
+	<h1>The Royal Mint</h1>
+
+
+
+	<script>
+/////////////////////////////////////////////////////////////////////////////
+currency = 0
+
+console.log("Aha! I see you are taking a peek at the console!\nNaughty...");
+
+let max = 1000;
+let min = 50;
+let loot = Math.floor(Math.random() * (max - min + 1) + min)	
+
+
+let label = document.createElement("label");
+label.textContent = "Hello there, nice to see you finally show up.";
+document.body.appendChild(label);
+
+let coinImage = document.createElement("img");
+coinImage.src = "https://th.bing.com/th/id/OIP.nyjlIp29AZQok_lJTGWUPwHaFj?w=271&h=203&c=7&r=0&o=7&dpr=1.1&pid=1.7&rm=3";
+document.body.appendChild(coinImage);
+
+
+let robButton= document.createElement("button");
+robButton.textContent = "Rob a bank?";
+robButton.addEventListener("click", robFunction);
+document.body.appendChild(robButton);
+
+let weaponCost = 250;
+let weaponName = "Brass Knuckles";
+
+
+let weaponUpgrade = document.createElement("button");
+weaponUpgrade.textContent = "Purchase: " + weaponName + " £" + weaponCost;
+document.body.appendChild(weaponUpgrade);
+
+
+let bankVault = document.createElement("label");
+bankVault.textContent = "Heist Value: " + "£" + max;
+document.body.appendChild(bankVault);
+bankVault.style.display = "block";
+
+let risk = 90;
+
+let riskLabel = document.createElement("label");
+riskLabel.textContent = "Risk: " + risk + "%";
+document.body.appendChild(riskLabel);
+riskLabel.style.display = "block";
+
+
+
+
+robButton.style.display = "block";
+
+
+let clickButton = document.createElement("button");
+clickButton.textContent = "£" + currency;
+clickButton.addEventListener("click", addCash);
+document.body.appendChild(clickButton);
+
+
+
+clickButton.appendChild(coinImage);
+
+//POSITIONING OF THE CLICK BUTTON
+clickButton.style.display = "block";
+clickButton.style.margin = "0 auto";
+
+function addCash() {
+    currency += 1;
+    clickButton.textContent = "£" + currency;
+    weaponUpgrade.textContent = "Purchase: " + weaponName + " £" + weaponCost;
+
+    clickButton.appendChild(coinImage);
+    if(currency >= 100) {
+    
+    }
+
+    }
+
+function robFunction() {
+    randomChance = Math.floor(Math.random() * 100);
+    bankVault.textContent = "Heist Value " + "£" + max;
+
+
+    console.log(randomChance + "%");
+    if(randomChance <= risk) {
+	let loot = Math.floor(Math.random() * (max - min + 1) + min)	
+        robButton.textContent = "BUSTED. Their Security Has increased now.";
+        currency = 0;
+        clickButton.textContent = "£" + currency;
+        clickButton.appendChild(coinImage);
+	max = 100;
+	min = 5
+	bankVault.textContent = "Heist Value " + "£" + max;
+
+	
+    }
+    
+    else{
+	console.log(randomChance + "%");
+	let loot = Math.floor(Math.random() * (max - min + 1) + min)	
+
+
+        robButton.textContent = "U MADE A GREAT HEIST.\nThieving skill Increased!";
+        currency += loot;
+        clickButton.textContent = "£" + currency;
+        clickButton.appendChild(coinImage);
+	max *= 2
+	bankVault.textContent = "Heist Value " + "£" + max;
+	
+	
+	
+    }
+
+
+    }
+
+weaponUpgrade.addEventListener("click", function() {
+    if(currency >= weaponCost) {
+        currency -= weaponCost
+        weaponName = "Baseball Bat";
+	weaponCost += 850;
+        risk -= 5;
+	clickButton.textContent = "£" + currency;
+	clickButton.appendChild(coinImage);
+	riskLabel.textContent = "Risk: " + risk +"%";
+	weaponUpgrade.textContent = "Purchase: " + weaponName + " £" + weaponCost;
+	
+    
+    }
+
+    else{
+        weaponUpgrade.textContent = "Insufficient funds";
+	clickButton.textContent = "£" + currency;
+	clickButton.appendChild(coinImage);
+
+    }
+})
+		
+
+	</script>
+
+
+
+    </body>
+
+</html>
